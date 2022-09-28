@@ -10,6 +10,6 @@ resource "aws_dynamodb_table" "test-table" {
     name = var.hash_key
     type = "S"
   }
-  tags = var.tags
+  #tags = var.tags
 }
 
