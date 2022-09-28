@@ -1,4 +1,4 @@
-module "test_resources" {
+module "test_resources_dynamodb" {
     source = "../modules/dynamodb"
 
 

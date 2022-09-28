@@ -1,4 +1,4 @@
-module "test_resources" {
+module "test_resources_glue" {
     source = "../modules/glue"
     tags = var.tags 
 

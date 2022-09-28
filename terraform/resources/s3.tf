@@ -1,5 +1,5 @@
 
-module "test_resources" {
+module "test_resources_s3" {
     source = "../modules/s3"
     #S3
     region = var.region
