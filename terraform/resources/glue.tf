@@ -1,6 +1,6 @@
 module "test_resources_glue" {
     source = "../modules/glue"
-    tags = var.tags 
+    #tags = var.tags 
 
 
     #Glue 
