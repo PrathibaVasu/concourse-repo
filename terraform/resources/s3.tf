@@ -1,4 +1,10 @@
 
+provider "aws" {
+    region = "us-east-1"
+}
+ 
+
+
 module "test_resources_s3" {
     source = "../modules/s3"
     #S3
