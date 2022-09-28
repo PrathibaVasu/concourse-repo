@@ -12,7 +12,7 @@ environment = "Staging"
 
 #module 
 #s3 
-region = "us-east-1"
+#region = "us-east-1"
 bucket_name = "test-terraform-s3-bucket345"
 acl_value = "private"
 versioning = true
