@@ -35,12 +35,36 @@ jobs:
                 - |
                   terraform --version
 
-    - task: run-terraform
+    - task: plan-terraform
       config:
         platform: linux
         image_resource:
           type: docker-image
           source: {repository: hashicorp/terraform}
         inputs:
-            - name: terraform-resources  
-        run: { path: terraform-resources/terraform/config/terraform_create.sh }
+            - name: terraform-resources        
+        run:
+            path: sh
+            args: 
+                - -exc
+                - |
+                  env
+                  ls -lrth
+                  cd terraform-resources/
+                  mkdir ./terraform/temp 
+                  find ./terraform -name '*.tf*' -exec cp {} ./terraform/temp/ \;
+                  cd ./terraform/temp
+                  ls -lrth                  
+                  terraform init 
+                  terraform plan
+
+
+    - task: run-terraform
+      input_mapping: { infra-repo: terraform-resources }    
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source: {repository: hashicorp/terraform}
+        inputs: [{ name: infra-repo }]
+        run: { path: infra-repo/terraform/config/terraform_create.sh }
