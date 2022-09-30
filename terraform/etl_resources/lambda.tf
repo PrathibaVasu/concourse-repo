@@ -9,7 +9,7 @@ module "lambda_function" {
   handler       = "index.lambda_handler"
   runtime       = "python3.9"
 
-  source_path = "./terraform/scripts/lambda_scripts/rds_lambda_handler"
+  source_path = "${path.module}/terraform/scripts/lambda_scripts/rds_lambda_handler"
   #source_path = "terraform-resources/terraform/scripts/lambda_scripts/rds_lambda_handler"
 
   tags = {
@@ -17,6 +17,7 @@ module "lambda_function" {
   }
   create_role = false
   lambda_role = "arn:aws:iam::298841451579:role/AWSPractice-Developer"
+  create_package = false 
 }
 
 output "pwd" {
