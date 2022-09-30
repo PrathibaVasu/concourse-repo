@@ -63,14 +63,16 @@ jobs:
                   
 
     - task: run-terraform
-      input_mapping: { infra-repo: terraform-resources }    
+      #input_mapping: { infra-repo: terraform-resources }    
       config:
         platform: linux
         image_resource:
           type: docker-image
           source: {repository: hashicorp/terraform}
-        inputs: [{ name: infra-repo }]
+        #inputs: [{ name: infra-repo }]
         #run: { path: infra-repo/terraform/config/terraform_create.sh }
+        inputs:
+            - name: terraform-resources  
         run:
             path: sh
             args:
@@ -78,4 +80,4 @@ jobs:
                 - |
                   env
                   ls -lrth
-                  cd terraform-resources/terraform/config/terraform_create.sh
+                  sh terraform-resources/terraform/config/terraform_create.sh
