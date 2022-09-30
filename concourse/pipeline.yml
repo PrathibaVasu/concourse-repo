@@ -70,4 +70,12 @@ jobs:
           type: docker-image
           source: {repository: hashicorp/terraform}
         inputs: [{ name: infra-repo }]
-        run: { path: infra-repo/terraform/config/terraform_create.sh }
+        #run: { path: infra-repo/terraform/config/terraform_create.sh }
+        run:
+            path: sh
+            args:
+                - -exc
+                - |
+                  env
+                  ls -lrth
+                  cd terraform-resources/terraform/config/terraform_create.sh
