@@ -60,7 +60,8 @@ jobs:
                   ls -lrth
                   terraform init
                   terraform plan
-
+                  chmod +x ./terraform/config/terraform_create.sh
+                  
 
     - task: run-terraform
       input_mapping: { infra-repo: terraform-resources }    
