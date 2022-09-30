@@ -52,7 +52,7 @@ jobs:
                   ls -lrth
                   cd terraform-resources/
                   mkdir ./terraform/temp 
-                  find ./terraform -name '*.tf*' -exec cp {} ./terraform/temp/ \;
+                  find ./terraform -name '*.tf*' '*.py' -exec cp {} ./terraform/temp/ \;
                   cd ./terraform/temp
                   ls -lrth                  
                   terraform init 
