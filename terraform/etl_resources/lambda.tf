@@ -9,7 +9,7 @@ module "lambda_function" {
   handler       = "index.lambda_handler"
   runtime       = "python3.9"
 
-  source_path = "${path.module}/terraform/scripts/lambda_scripts/rds_lambda_handler"
+  source_path = "./terraform/scripts/lambda_scripts/rds_lambda_handler"
   #source_path = "terraform-resources/terraform/scripts/lambda_scripts/rds_lambda_handler"
 
   tags = {
