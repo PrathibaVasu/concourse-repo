@@ -42,21 +42,23 @@ jobs:
           type: docker-image
           source: {repository: hashicorp/terraform}
         inputs:
-            - name: terraform-resources        
+            - name: terraform-resources  
         run:
             path: sh
-            args: 
+            args:
                 - -exc
                 - |
                   env
                   ls -lrth
                   cd terraform-resources/
-                  mkdir ./terraform/temp 
-                  find ./terraform -name '*.tf*' -exec cp {} ./terraform/temp/ \;
-                  cp -r ./terraform ./terraform/temp 
-                  cd ./terraform/temp
-                  ls -lrth                  
-                  terraform init 
+                  mkdir ./temp
+                  find ./terraform -name '*.tf*' -exec cp {} ./temp/ \;
+                  cp -r ./terraform ./temp
+                  ls
+                  pwd
+                  cd ./temp
+                  ls -lrth
+                  terraform init
                   terraform plan
 
 
