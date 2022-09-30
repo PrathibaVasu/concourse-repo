@@ -1,0 +1,46 @@
+#4
+resources:
+- name: terraform-resources
+  type: git
+  source:
+    uri: https://github.com/PrathibaVasu/concourse-repo.git
+    branch: tn  
+
+
+- name: terraform-image
+  type: git
+  source:
+    uri: https://github.com/hashicorp/docker-hub-images.git
+    branch: master
+
+
+jobs:
+  - name: terraform-pipe-line
+    plan:
+    - get: terraform-image
+    - get: terraform-resources
+      trigger: true
+
+
+    - task: check-terrafom-version
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source: {repository: hashicorp/terraform}
+        run:
+            path: sh
+            args: 
+                - -exc
+                - |
+                  terraform --version
+
+    - task: run-terraform
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source: {repository: hashicorp/terraform}
+        inputs:
+            - name: terraform-resources  
+        run: { path: terraform-resources/terraform/config/terraform_create.sh }
