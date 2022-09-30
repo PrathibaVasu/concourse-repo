@@ -9,7 +9,7 @@ module "lambda_function" {
   handler       = "index.lambda_handler"
   runtime       = "python3.9"
 
-  source_path = "./lambda-function"
+  source_path = "../scripts/lambda_scripts/rds_lambda_handler"
   tags = {
     Name = "my-lambda1"
   }
