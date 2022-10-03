@@ -23,18 +23,3 @@ resource "aws_glue_job" "example_job" {
   }  
 }
 
-
-variable "python_version" {
-  default = "3"
-  description = "Python_version"
-}
-
-variable "no_of_workers" {
-  default = "2"
-  description = "no_of_workers"
-}
-
-variable "script_location" {
-  default = "s3://ateststack-mycdkrallybucket34563723813c-9yh1y22c9zhe/test_job.py"
-  description = "glue script location"
-}
