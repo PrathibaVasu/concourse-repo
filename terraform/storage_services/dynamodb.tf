@@ -16,8 +16,8 @@ resource "aws_dynamodb_table" "dynamodb_tables" {
   }
 
   attribute {
-    name = each.value['range_key']
-    type = each.value['range_key_type']
+    name = each.value["range_key"]
+    type = each.value["range_key_type"]
   }
 
   tags = local.tags 

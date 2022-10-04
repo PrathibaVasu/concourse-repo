@@ -8,7 +8,7 @@ module "rds_lambda_function" {
   description   = "My awesome lambda function"
   handler       = var.handler
   runtime       = var.runtime
-  source_path = var.source_path
+  source_path = "${path.module}var.source_path"
   environment_variables = {
     "GLUE_ARN" = aws_glue_job.rds_glue_job.arn
   }
@@ -27,7 +27,7 @@ module "mongodb_lambda_function" {
   description   = "My awesome lambda function"
   handler       = var.handler
   runtime       = var.runtime
-  source_path = var.source_path
+  source_path = "${path.module}var.source_path"
   environment_variables = {
     "GLUE_ARN" = aws_glue_job.mongodb_glue_job.arn
   }

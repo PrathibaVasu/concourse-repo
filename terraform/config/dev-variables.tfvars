@@ -28,7 +28,7 @@ wrc = 10
 
 dynamodb_table = {
     table1 = {
-      name = "test-table1"
+      name = "table1"
       hash_key = "id"
       hask_key_type = "N"
       range_key = "name"
@@ -36,18 +36,19 @@ dynamodb_table = {
       }
 
     table2 = {
+      name = "table2"      
       hash_key = "id"
       hask_key_type = "N"
       range_key = "name"
       range_key_type = "S"
     }
     table3 = {
+      name = "table3"
       hash_key = "id"
       hask_key_type = "N"
       range_key = "name"
       range_key_type = "S"
     }
-  }
 }
 
 
@@ -61,7 +62,7 @@ script_location = "s3://ateststack-mycdkrallybucket34563723813c-9yh1y22c9zhe/tes
 function_name = "terraform-test-function"
 handler       = "index.lambda_handler"
 runtime       = "python3.9"  
-source_path = "${path.module}/terraform/scripts/lambda_scripts/rds_lambda_handler"
+source_path = "/terraform/scripts/lambda_scripts/rds_lambda_handler"
 create_role = false
 lambda_role = "arn:aws:iam::298841451579:role/AWSPractice-Developer"
 

@@ -15,7 +15,10 @@ locals  {
     dynamodb_table = var.dynamodb_table
 
     #Event 
-    event_name = "${var.org}-${var.region}-${var.stack_env}-event-rds" 
+    rds_event_name = "${var.org}-${var.region}-${var.stack_env}-event-rds" 
+    mongodb_event_name = "${var.org}-${var.region}-${var.stack_env}-event-mongodb" 
+    rds_target_id  = "rds-lambda-target"
+    mongodb_target_id =  "mongodb-lambda-target"
 
     #Lambda 
     rds_function_name = "${var.org}-${var.region}-${var.stack_env}-lambda-rds-function" 

@@ -9,7 +9,7 @@ resource "aws_cloudwatch_event_rule" "rds_event" {
 
 resource "aws_cloudwatch_event_target" "rds_lambda_target" {
   rule      = aws_cloudwatch_event_rule.rds_event.name
-  target_id = var.target_id
+  target_id = local.rds_lambda_target
   arn       = module.rds_lambda_function.lambda_function_arn
 }
 
@@ -33,7 +33,7 @@ resource "aws_cloudwatch_event_rule" "mongodb_event" {
 
 resource "aws_cloudwatch_event_target" "mongodb_lambda_target" {
   rule      = aws_cloudwatch_event_rule.mongodb_event.name
-  target_id = var.target_id
+  target_id = local.mongodb_lambda_target
   arn       = module.mongodb_lambda_function.lambda_function_arn
 }
 
