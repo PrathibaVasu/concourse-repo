@@ -1,9 +1,12 @@
+#Common 
+org = "TalentNet"
+region = "us-east-1"
 
-#common 
-tags = {
-    Project = "TalentNet"
-    Environment = "Dev"
-}
+# Tags  
+owner = "xxx@talentnet.com"  
+stack_env = "dev" 
+cost_center = "38858" 
+application = "edw"
 
 #S3
 staging_bucket_name = "test-terraform-bucket1234"
@@ -22,7 +25,9 @@ table_billing_mode = "PROVISIONED"
 rcu = 10 
 wrc = 10
 
-table1 = {
+
+dynamodb_table = {
+    table1 = {
       name = "test-table1"
       hash_key = "id"
       hask_key_type = "N"
@@ -30,18 +35,20 @@ table1 = {
       range_key_type = "S"
       }
 
-table2 = {
+    table2 = {
       hash_key = "id"
       hask_key_type = "N"
       range_key = "name"
       range_key_type = "S"
     }
-table3 = {
+    table3 = {
       hash_key = "id"
       hask_key_type = "N"
       range_key = "name"
       range_key_type = "S"
-    }    
+    }
+  }
+}
 
 
 
@@ -56,6 +63,7 @@ handler       = "index.lambda_handler"
 runtime       = "python3.9"  
 source_path = "${path.module}/terraform/scripts/lambda_scripts/rds_lambda_handler"
 create_role = false
+lambda_role = "arn:aws:iam::298841451579:role/AWSPractice-Developer"
 
 #Event 
 event_name                = "terraform-test-event"
@@ -65,7 +73,6 @@ target_id  = "test-terraform-rule"
 
 #VPC 
 vpc_name = "test-terraform-vpc"
-region = "us-east-1"
 cidr_block = "10.0.0.0/16"
 private_subnet_cidr_blocks = ["10.0.1.0/24", "10.0.3.0/24"]
 public_subnet_cidr_blocks = ["10.0.0.0/24", "10.0.2.0/24"]

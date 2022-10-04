@@ -1,4 +1,22 @@
 
+#Common 
+
+variable "org" {}
+
+variable "region" {}
+
+
+### Tags 
+
+variable "owner" {}
+
+variable "stack_env" {}
+
+variable "cost_center" {}
+
+variable "application" {}
+
+
 ###S3 
 
 variable "staging_bucket_name" {}
@@ -7,7 +25,6 @@ variable "landing_bucket_name" {}
 
 variable "versioning" {}
 
-variable "tags" {}
 
 
 ### Glue variables 
@@ -34,11 +51,9 @@ variable "rcu" {}
 
 variable "wrc" {}
 
-variable "table1" {}
-
-variable "table1" {}
-
-variable "table1" {}
+variable "dynamodb_table" {
+    type = any
+}
 
 
 ###Lambda
@@ -52,6 +67,8 @@ variable "runtime" {}
 variable "source_path" {}
 
 variable "create_role" {}
+
+variable "lambda_role" {}
 
 
 #Cloudwatch Event 
@@ -70,8 +87,6 @@ variable "vpc_name" {}
 variable "project" {}
 
 variable "environment" {}
-
-variable "region" {}
 
 variable "cidr_block" {}
 

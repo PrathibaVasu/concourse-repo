@@ -1,28 +1,18 @@
 ###dynamodb 
 
-
-locals  {
-  dynamodb_table = {
-    "table1" = var.table1
-    "table2" = var.table2 
-    "table3" = var.table3 
-  }
-}
-
-
-resource "aws_dynamodb_table" "basic-dynamodb-table" {
+resource "aws_dynamodb_table" "dynamodb_tables" {
 
   for_each = local.dynamodb_table
-  name           = each.value['name']
+  name           =  "${var.org}-${var.region}-${var.stack_env}-dynamodb-${each.value["name"]}" 
   billing_mode   = var.table_billing_mode
   read_capacity  = var.rcu
   write_capacity = var.wrc
-  hash_key       = each.value['hash_key']
-  range_key      = each.value['range_key']
+  hash_key       = each.value["hash_key"]
+  range_key      = each.value["range_key"]
 
   attribute {
-    name = each.value['hash_key']
-    type = each.value['hask_key_type']
+    name = each.value["hash_key"]
+    type = each.value["hask_key_type"]
   }
 
   attribute {
@@ -30,7 +20,7 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
     type = each.value['range_key_type']
   }
 
-  tags = var.tags 
+  tags = local.tags 
 }
 
 

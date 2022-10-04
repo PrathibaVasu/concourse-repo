@@ -1,10 +1,5 @@
 
-locals  {
-  s3_bucket_name = [var.staging_bucket_name, var.landing_bucket_name]
-}
-
-
-
+### S3 buckets creation  ###
 module "s3_bucket" {
   source = "terraform-aws-modules/s3-bucket/aws"
 
@@ -12,8 +7,9 @@ module "s3_bucket" {
   for_each = toset(local.s3_bucket_name)
 
   bucket = each.key 
-  tags = var.tags
+  tags = local.tags
   acl    = "private"
+  versioning = var.versioning
 
   # S3 bucket-level Public Access Block configuration
   block_public_acls       = true
@@ -21,46 +17,14 @@ module "s3_bucket" {
   ignore_public_acls      = true
   restrict_public_buckets = true 
 
-  versioning = var.versioning
-
-/*
+  #Encrypting the bucket with KMSkey 
   server_side_encryption_configuration = {
     rule = {
       apply_server_side_encryption_by_default = {
-        kms_master_key_id = local.kms_arn_map[each.value["datasource_id"]]["arn"]
+        kms_master_key_id = aws_kms_key.s3_kms_key.arn
         sse_algorithm     = "aws:kms"
       }
-      bucket_key_enabled = false
+      bucket_key_enabled = true
     }
   }
-*/
-
 }
-
-
-/*
-
-# KMS key used for encrypting s3 buckets,kinesis streams,cloudwatch logs
-module "data_lake_s3_bucket_kms_key" {
-  source  = "app.terraform.io/dummy/kms/aws"
-  version = "0.0.12"
-  for_each = {
-    for object in local.s3_raw_bucket : object["datasource_id"] => object
-  }
-  description              = "This kms key is used for encrypting s3 buckets,kinesis streams,cloudwatch logs"
-  enable_key_rotation      = true
-  kms_key_admin_principals = var.data_lake_s3_bucket_kms_key_admin_principals
-  kms_key_usage_principals = var.data_lake_s3_bucket_kms_key_usage_principals
-  kms_key_usage_services = var.data_lake_s3_bucket_kms_key_usage_services
-  alias_name             = each.value["kms_key"]
-  name                   = each.value["kms_key"]
-  owner                  = var.owner
-  env                    = var.env
-
-}
-
-# Create map of KMS key with ARNs, alias, IDs
-locals {
-  kms_arn_map = module.data_lake_s3_bucket_kms_key
-}
-*/

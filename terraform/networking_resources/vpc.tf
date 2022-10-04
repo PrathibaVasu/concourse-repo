@@ -10,11 +10,9 @@ resource "aws_vpc" "default" {
 
   tags = merge(
     {
-      Name        = var.vpc_name,
-      Project     = var.project,
-      Environment = var.environment
+      Name        = local.vpc_name
     },
-    var.tags
+    local.tags
   )
 }
 
@@ -23,11 +21,9 @@ resource "aws_internet_gateway" "default" {
 
   tags = merge(
     {
-      Name        = "gwInternet",
-      Project     = var.project,
-      Environment = var.environment
+      Name        = local.igw_name
     },
-    var.tags
+    local.tags
   )
 }
 
@@ -38,11 +34,9 @@ resource "aws_route_table" "private" {
 
   tags = merge(
     {
-      Name        = "PrivateRouteTable",
-      Project     = var.project,
-      Environment = var.environment
+      Name        = local.private_rt_name
     },
-    var.tags
+    local.tags
   )
 }
 
@@ -59,11 +53,9 @@ resource "aws_route_table" "public" {
 
   tags = merge(
     {
-      Name        = "PublicRouteTable",
-      Project     = var.project,
-      Environment = var.environment
+      Name        = local.public_rt_name
     },
-    var.tags
+    local.tags
   )
 }
 
@@ -82,11 +74,9 @@ resource "aws_subnet" "private" {
 
   tags = merge(
     {
-      Name        = "PrivateSubnet",
-      Project     = var.project,
-      Environment = var.environment
+      Name        = local.private_subnet
     },
-    var.tags
+    local.tags
   )
 }
 
@@ -100,11 +90,9 @@ resource "aws_subnet" "public" {
 
   tags = merge(
     {
-      Name        = "PublicSubnet",
-      Project     = var.project,
-      Environment = var.environment
+      Name        = local.public_subnet
     },
-    var.tags
+    local.tags
   )
 }
 
@@ -135,11 +123,9 @@ resource "aws_vpc_endpoint" "s3" {
 
   tags = merge(
     {
-      Name        = "endpointS3",
-      Project     = var.project,
-      Environment = var.environment
+      Name        = local.s3_endpoint_name
     },
-    var.tags
+    local.tags
   )
 }
 
@@ -162,10 +148,8 @@ resource "aws_nat_gateway" "default" {
 
   tags = merge(
     {
-      Name        = "gwNAT",
-      Project     = var.project,
-      Environment = var.environment
+      Name        = local.nat_gateway_name
     },
-    var.tags
+    local.tags
   )
 }
