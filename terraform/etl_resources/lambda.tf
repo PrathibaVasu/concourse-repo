@@ -1,5 +1,4 @@
 #rds lambda function    
-
 module "rds_lambda_function" {
   source = "terraform-aws-modules/lambda/aws"
 #  version = "2.34.0"

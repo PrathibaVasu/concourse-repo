@@ -15,7 +15,13 @@ module "staging_bucket" {
   ignore_public_acls      = true
   restrict_public_buckets = true 
 
-  #Encrypting the bucket with KMSkey 
+  #bucket-policy 
+  attach_policy = true
+  policy        = data.aws_iam_policy_document.staging_bucket_policy.json
+
+
+
+  #Encrypting the bucket with KMS key 
   server_side_encryption_configuration = {
     rule = {
       apply_server_side_encryption_by_default = {
@@ -32,7 +38,7 @@ module "integration_bucket" {
   source = "terraform-aws-modules/s3-bucket/aws"
 
 
-  bucket = bucket = local.integration_bucket_name 
+  bucket = local.integration_bucket_name 
   tags = local.tags
   acl    = "private"
   versioning = var.versioning
@@ -42,6 +48,10 @@ module "integration_bucket" {
   block_public_policy     = true
   ignore_public_acls      = true
   restrict_public_buckets = true 
+
+  # Bucket Policy  
+  attach_policy = true
+  policy        = data.aws_iam_policy_document.integration_bucket_policy.json
 
   #Encrypting the bucket with KMSkey 
   server_side_encryption_configuration = {
@@ -53,4 +63,6 @@ module "integration_bucket" {
       bucket_key_enabled = true
     }
   }
+
 }
+

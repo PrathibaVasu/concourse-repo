@@ -153,3 +153,8 @@ resource "aws_nat_gateway" "default" {
     local.tags
   )
 }
+
+
+output "subnet_id" {
+  value = aws_subnet.public 
+}

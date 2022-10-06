@@ -20,6 +20,11 @@ resource "aws_dynamodb_table" "dynamodb_tables" {
     type = each.value["range_key_type"]
   }
 
+  server_side_encryption =  {
+    enabled = true
+    kms_key_arn = aws_kms_key.dynamodb_kms_key.arn
+    }
+
   tags = local.tags 
 }
 
